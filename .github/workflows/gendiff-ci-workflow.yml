@@ -1,0 +1,25 @@
+name: gendiff-workflow
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ setup.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ setup.python-version }}
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+      - name: Run linter and pytest
+        run: |
+          make lint
+          make pytest
+      - name: Build and install
+        run: |
+          make build
+          make package-install
+      - name: Test usage
+        run: gendiff ${{ setup.test-file1 }} ${{ setup.test-file2 }}
