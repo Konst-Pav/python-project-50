@@ -3,6 +3,14 @@ import argparse
 import json
 
 
+def json_to_dict(json_file):
+    return json.load(json_file)
+
+
+def yml_to_dict(yml_file):
+    return
+
+
 def generate_diff(file_path_1, file_path_2):
     file1 = json.load(open(file_path_1))
     file2 = json.load(open(file_path_2))
