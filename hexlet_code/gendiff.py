@@ -12,34 +12,49 @@ def yml_to_dict(yml_file):
 
 
 def generate_diff(file_path_1, file_path_2):
+    # Приведение к dict
     file1 = json.load(open(file_path_1))
     file2 = json.load(open(file_path_2))
+    # Сравнение двух dict
+    # Множество всех ключей
     all_keys = set()
     all_keys.update(file1.keys())
     all_keys.update(file2.keys())
+    # Сортировка ключей
     all_keys = list(all_keys)
     all_keys.sort()
+    # Сравниваем соответственно условиям
     result = []
     for key in all_keys:
-        result.append(compare(key, file1, file2))
+        result.append(compare_by_key(key, file1, file2))
     return '\n'.join(result)
 
 
-def compare(key, file1, file2):
-    value1 = file1.get(key)
-    if isinstance(value1, bool):
-        value1 = str(value1).lower()
-    value2 = file2.get(key)
-    if isinstance(value2, bool):
-        value2 = str(value2).lower()
-    if (value1 is not None) and (value2 is None):
-        return f'- {key}: {value1}'
-    if (value1 is None) and (value2 is not None):
-        return f'+ {key}: {value2}'
-    if value1 == value2:
-        return f'  {key}: {value1}'
-    if value1 != value2:
-        return f'- {key}: {value1}\n+ {key}: {value2}'
+def compare_by_key(key, first_dict, second_dict):
+    first_value = first_dict.get(key)
+    second_value = second_dict.get(key)
+    # Исправляем bool
+    if isinstance(first_value, bool):
+        first_value = str(first_value).lower()
+    if isinstance(second_value, bool):
+        second_value = str(second_value).lower()
+    #
+    match key:
+        # Есть в первом файле, нет во втором
+        case 1 if first_value is not None and second_value is None:
+            print('Igogo')
+            return f'- {key}: {first_value}'
+        # Есть во втором файле, нет в первом
+        case 2 if second_value is not None and first_value is None:
+            return f'+ {key}: {second_value}'
+        # Значения идентичны
+        case 3 if first_value == second_value:
+            return f'  {key}: {first_value}'
+        # Значения различны
+        case 4 if first_value != second_value:
+            return f'- {key}: {first_value}\n+ {key}: {second_value}'
+        case _:
+            print(f'Hello! {key} {first_value}, {second_value}')
 
 
 def main():

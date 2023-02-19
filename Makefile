@@ -5,7 +5,7 @@ gendiff:
 	poetry run gendiff
 
 gendiff-test:
-	poetry run gendiff '/home/konstantin/projects/python-project-50/tests/file_1.json' '/home/konstantin/projects/python-project-50/tests/file_2.json'
+	poetry run gendiff './tests/file_1.json' './tests/file_2.json'
 
 build:
 	poetry build
