@@ -3,14 +3,6 @@ import argparse
 import json
 
 
-def json_to_dict(json_file):
-    return json.load(json_file)
-
-
-def yml_to_dict(yml_file):
-    return
-
-
 def generate_diff(file_path_1, file_path_2):
     # Приведение к dict
     file1 = json.load(open(file_path_1))
@@ -39,22 +31,17 @@ def compare_by_key(key, first_dict, second_dict):
     if isinstance(second_value, bool):
         second_value = str(second_value).lower()
     #
-    match key:
-        # Есть в первом файле, нет во втором
-        case 1 if first_value is not None and second_value is None:
-            print('Igogo')
+    match (first_value, second_value):
+        case (first_value, None):
             return f'- {key}: {first_value}'
-        # Есть во втором файле, нет в первом
-        case 2 if second_value is not None and first_value is None:
+        case (None, second_value):
             return f'+ {key}: {second_value}'
-        # Значения идентичны
-        case 3 if first_value == second_value:
+        case (first_value, second_value) if first_value == second_value:
             return f'  {key}: {first_value}'
-        # Значения различны
-        case 4 if first_value != second_value:
+        case (first_value, second_value) if first_value != second_value:
             return f'- {key}: {first_value}\n+ {key}: {second_value}'
         case _:
-            print(f'Hello! {key} {first_value}, {second_value}')
+            print('Something went wrong')
 
 
 def main():
