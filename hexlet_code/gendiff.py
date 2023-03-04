@@ -1,47 +1,71 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import yaml
+from yaml.loader import SafeLoader
+from os.path import basename
 
 
-def generate_diff(file_path_1, file_path_2):
-    # Приведение к dict
-    file1 = json.load(open(file_path_1))
-    file2 = json.load(open(file_path_2))
-    # Сравнение двух dict
-    # Множество всех ключей
-    all_keys = set()
-    all_keys.update(file1.keys())
-    all_keys.update(file2.keys())
-    # Сортировка ключей
-    all_keys = list(all_keys)
-    all_keys.sort()
-    # Сравниваем соответственно условиям
-    result = []
-    for key in all_keys:
-        result.append(compare_by_key(key, file1, file2))
-    return '\n'.join(result)
+def generate_diff(file1, file2):
+    dict1 = convert_to_dict(file1)
+    dict2 = convert_to_dict(file2)
+    result_list = []
+
+    def walk(arg_dict1, arg_dict2, result_list):
+        all_keys = get_sorted_unique_keys(arg_dict1, arg_dict2)
+        for key in all_keys:
+            value1 = arg_dict1.get(key, None)
+            value2 = arg_dict2.get(key, None)
+            if isinstance(value1, dict) and isinstance(value2, dict):
+                conclusion = ' '
+                nested_result_list = []
+                walk(value1, value2, nested_result_list)
+                value = nested_result_list
+            else:
+                value = {'before': value1, 'after': value2}
+                match (value1, value2):
+                    case (value1, None):
+                        conclusion = 'Removed'
+                    case (None, value2):
+                        conclusion = 'Added'
+                    case (value1, value2) if value1 == value2:
+                        conclusion = 'Same'
+                    case (value1, value2) if value1 != value2:
+                        conclusion = 'Changed'
+                    case _:
+                        conclusion = 'Something went wrong'
+            result_list.append({'conclusion': conclusion, 'key': key, 'value': value})
+
+    walk(dict1, dict2, result_list)
+    return result_list
 
 
-def compare_by_key(key, first_dict, second_dict):
-    first_value = first_dict.get(key)
-    second_value = second_dict.get(key)
-    # Исправляем bool
-    if isinstance(first_value, bool):
-        first_value = str(first_value).lower()
-    if isinstance(second_value, bool):
-        second_value = str(second_value).lower()
-    #
-    match (first_value, second_value):
-        case (first_value, None):
-            return f'- {key}: {first_value}'
-        case (None, second_value):
-            return f'+ {key}: {second_value}'
-        case (first_value, second_value) if first_value == second_value:
-            return f'  {key}: {first_value}'
-        case (first_value, second_value) if first_value != second_value:
-            return f'- {key}: {first_value}\n+ {key}: {second_value}'
+def get_sorted_unique_keys(dict1, dict2):
+    unique_keys = set(dict1)
+    unique_keys.update(dict2)
+    list_unique_keys = list(unique_keys)
+    list_unique_keys.sort()
+    return list_unique_keys
+
+
+def convert_to_dict(path_to_file):
+    file_format = get_file_format(basename(path_to_file))
+    match file_format:
+        case 'json':
+            return json.load(open(path_to_file))
+        case 'yaml' | 'yml':
+            return yaml.load(open(path_to_file), Loader=SafeLoader)
         case _:
-            print('Something went wrong')
+            print('Unknown format')
+            return None
+
+
+def get_file_format(file_name):
+    for i, char in enumerate(file_name[::-1]):
+        if char == '.':
+            return file_name[-i::]
+    else:
+        return None
 
 
 def main():

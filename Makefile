@@ -4,8 +4,14 @@ install:
 gendiff:
 	poetry run gendiff
 
-gendiff-test:
-	poetry run gendiff './tests/file_1.json' './tests/file_2.json'
+gendiff-test-json:
+	poetry run gendiff './tests/fixtures/file_1.json' './tests/file_2.json'
+
+gendiff-test-yaml:
+	poetry run gendiff './tests/fixtures/file_1.yml' './tests/file_2.yml'
+
+gendiff-test-json-yaml:
+	poetry run gendiff './tests/fixtures/file_1.json' './tests/file_2.yml'
 
 build:
 	poetry build
@@ -23,4 +29,4 @@ lint:
 	poetry run flake8 hexlet_code
 
 pytest:
-	poetry run pytest
+	poetry run pytest -v
