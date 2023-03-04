@@ -9,20 +9,16 @@ from os.path import basename
 def generate_diff(file1, file2):
     dict1 = convert_to_dict(file1)
     dict2 = convert_to_dict(file2)
-    result_list = []
 
-    def walk(arg_dict1, arg_dict2, result_list):
-        all_keys = get_sorted_unique_keys(arg_dict1, arg_dict2)
-        for key in all_keys:
+    def get_diff(arg_dict1, arg_dict2):
+        unique_keys = sorted_unique_keys(arg_dict1, arg_dict2)
+
+        def compare_value(key):
             value1 = arg_dict1.get(key, None)
             value2 = arg_dict2.get(key, None)
             if isinstance(value1, dict) and isinstance(value2, dict):
-                conclusion = ' '
-                nested_result_list = []
-                walk(value1, value2, nested_result_list)
-                value = nested_result_list
+                return {'key': key, 'children': get_diff(value1, value2)}
             else:
-                value = {'before': value1, 'after': value2}
                 match (value1, value2):
                     case (value1, None):
                         conclusion = 'Removed'
@@ -34,13 +30,13 @@ def generate_diff(file1, file2):
                         conclusion = 'Changed'
                     case _:
                         conclusion = 'Something went wrong'
-            result_list.append({'conclusion': conclusion, 'key': key, 'value': value})
+                return {'key': key, 'conclusion': conclusion, 'value': {'before': value1, 'after': value2}}
 
-    walk(dict1, dict2, result_list)
-    return result_list
+        return list(map(compare_value, unique_keys))
+    return get_diff(dict1, dict2)
 
 
-def get_sorted_unique_keys(dict1, dict2):
+def sorted_unique_keys(dict1, dict2):
     unique_keys = set(dict1)
     unique_keys.update(dict2)
     list_unique_keys = list(unique_keys)

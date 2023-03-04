@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from hexlet_code.gendiff import generate_diff, get_sorted_unique_keys, convert_to_dict
+from hexlet_code.gendiff import generate_diff, sorted_unique_keys, convert_to_dict
 from tests.fixtures.diff_nested_struct import diff_nested_struct_to_tests as diff_nested_struct
 
 
@@ -53,11 +53,12 @@ def test_generate_diff_in_plane_struct():
 
 
 def test_generate_diff_in_nested_struct():
+    print(generate_diff(nested_struct_file1, nested_struct_file2))
     assert generate_diff(nested_struct_file1, nested_struct_file2) == diff_nested_struct
 
 
 def test_get_sorted_unique_keys():
-    assert get_sorted_unique_keys(plane_dict1, plane_dict2) == ['car', 'games', 'key']
+    assert sorted_unique_keys(plane_dict1, plane_dict2) == ['car', 'games', 'key']
 
 
 def test_convert_json_to_dict():

@@ -1,0 +1,6 @@
+{
+  "key1": "value1",
+  "nested-struct": {
+    "nested-key2": "value2"
+  }
+}
