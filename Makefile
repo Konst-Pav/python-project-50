@@ -32,4 +32,4 @@ pytest:
 	poetry run pytest -vv
 
 test-coverage:
-	poetry run pytest --cov=gen-diff-utility --cov-report xml
+	poetry run pytest --cov=gendiff_util --cov-report xml
