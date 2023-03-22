@@ -30,3 +30,6 @@ lint:
 
 pytest:
 	poetry run pytest -vv
+
+test-coverage:
+	poetry run pytest --cov=python_project_50 --cov-report xml
