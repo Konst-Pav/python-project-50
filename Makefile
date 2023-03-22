@@ -5,13 +5,13 @@ gendiff:
 	poetry run gendiff
 
 gendiff-test-json:
-	poetry run gendiff './tests/fixtures/file_1.json' './tests/file_2.json'
+	poetry run gendiff './tests/fixtures/file_1.json' './tests/fixtures/file_2.json'
 
 gendiff-test-yaml:
-	poetry run gendiff './tests/fixtures/file_1.yml' './tests/file_2.yml'
+	poetry run gendiff './tests/fixtures/file_1.yml' './tests/fixtures/file_2.yml'
 
 gendiff-test-json-yaml:
-	poetry run gendiff './tests/fixtures/file_1.json' './tests/file_2.yml'
+	poetry run gendiff './tests/fixtures/file_1.json' './tests/fixtures/file_2.yml'
 
 build:
 	poetry build
@@ -26,7 +26,7 @@ package-reinstall:
 	python3 -m pip install --user --force-reinstall dist/*.whl
 
 lint:
-	poetry run flake8 hexlet_code
+	poetry run flake8 gendiff_util
 
 pytest:
-	poetry run pytest -v
+	poetry run pytest -vv

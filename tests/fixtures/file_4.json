@@ -1,8 +1,10 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "nested-struct": {
-    "nested-key2": "value2",
-    "nested-key3": "value3"
+  "num": 123,
+  "games": {
+    "sim": "il2",
+    "strategy": "sc2",
+    "rpg": {
+      "3dpv": "conan"
+    }
   }
 }

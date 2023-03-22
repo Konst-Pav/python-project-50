@@ -1,4 +1,4 @@
-name: gendiff-workflow
+name: gendiff_util-workflow
 on: push
 jobs:
   build:

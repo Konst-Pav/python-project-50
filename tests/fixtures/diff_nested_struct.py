@@ -1,19 +1,53 @@
 diff_nested_struct_to_tests = [
+    {'key': 'games', 'children': [
+        {'key': 'rpg', 'children': [
+            {'key': '3dpv', 'value1': 'hades', 'value2': 'conan', 'status': 'updated'},
+            {'key': 'fpv', 'value1': 'fallout', 'status': 'removed'}
+        ]},
+        {'key': 'sim', 'value2': 'il2', 'status': 'added'},
+        {'key': 'strategy', 'value1': 'wc3', 'value2': 'sc2', 'status': 'updated'}
+    ]},
+    {'key': 'num', 'value': 123, 'status': 'without changes'}
+]
+
+dict1 = {
+    'num': 123,
+    'games': {
+        'strategy': 'wc3',
+        'rpg': {
+            'fpv': 'fallout',
+            '3dpv': 'hades'
+        }
+    }
+}
+
+dict2 = {
+    'num': 123,
+    'games': {
+        'sim': 'il2',
+        'strategy': 'sc2',
+        'rpg': {
+            '3dpv': 'conan'
+        }
+    }
+}
+
+
+diff = [
     {'key': 'common', 'children': [
-        {'key': 'follow', 'conclusion': 'Added', 'value': {'before': None, 'after': False}},
-        {'key': 'setting1', 'conclusion': 'Same', 'value': {'before': 'Value 1', 'after': 'Value 1'}},
-        {'key': 'setting2', 'conclusion': 'Removed', 'value': {'before': 200, 'after': None}},
-        {'key': 'setting3', 'conclusion': 'Removed', 'value': {'before': True, 'after': None}},
-        {'key': 'setting4', 'conclusion': 'Added', 'value': {'before': None, 'after': 'blah blah'}},
-        {'key': 'setting5', 'conclusion': 'Added', 'value': {'before': None, 'after': {'key5': 'value5'}}},
+        {'key': 'setting1', 'value': 'Value 1', 'status': 'without changes'},
+        {'key': 'setting2', 'value': 200, 'status': 'without changes'},
+        {'key': 'setting3', 'value': True, 'status': 'without changes'},
         {'key': 'setting6', 'children': [
             {'key': 'doge', 'children': [
-                {'key': 'wow', 'conclusion': 'Changed', 'value': {'before': '', 'after': 'so much'}}]},
-            {'key': 'key', 'conclusion': 'Same', 'value': {'before': 'value', 'after': 'value'}},
-            {'key': 'ops', 'conclusion': 'Added', 'value': {'before': None, 'after': 'vops'}}]}]},
+                {'key': 'wow', 'value': '', 'status': 'without changes'}]},
+            {'key': 'key', 'value': 'value', 'status': 'without changes'}]}]},
     {'key': 'group1', 'children': [
-        {'key': 'baz', 'conclusion': 'Changed', 'value': {'before': 'bas', 'after': 'bars'}},
-        {'key': 'foo', 'conclusion': 'Same', 'value': {'before': 'bar', 'after': 'bar'}},
-        {'key': 'nest', 'conclusion': 'Changed', 'value': {'before': {'key': 'value'}, 'after': 'str'}}]},
-    {'key': 'group2', 'conclusion': 'Removed', 'value': {'before': {'abc': 12345, 'deep': {'id': 45}}, 'after': None}},
-    {'key': 'group3', 'conclusion': 'Added', 'value': {'before': None, 'after': {'deep': {'id': {'number': 45}}, 'fee': 100500}}}]
+        {'key': 'baz', 'value': 'bas', 'status': 'without changes'},
+        {'key': 'foo', 'value': 'bar', 'status': 'without changes'},
+        {'key': 'nest', 'children': [
+            {'key': 'key', 'value': 'value', 'status': 'without changes'}]}]},
+    {'key': 'group2', 'children': [
+        {'key': 'abc', 'value': 12345, 'status': 'without changes'},
+        {'key': 'deep', 'children': [
+            {'key': 'id', 'value': 45, 'status': 'without changes'}]}]}]
