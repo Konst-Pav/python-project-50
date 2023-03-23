@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "gen-diff-utility"
+name = "hexlet-code"
 version = "0.1.0"
 description = ""
 authors = ["Konstantin-P <k.pavlov.reg@yandex.ru>"]
@@ -11,7 +11,7 @@ python = "^3.11"
 pyyaml = "^6.0"
 
 [tool.poetry.scripts]
-gendiff = "gendiff_util.scripts.gendiff:main"
+gendiff = "gendiff_util.gendiff:main"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
