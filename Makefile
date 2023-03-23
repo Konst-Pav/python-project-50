@@ -5,13 +5,19 @@ gendiff:
 	poetry run gendiff
 
 gendiff-test-json:
-	poetry run gendiff './tests/fixtures/file_1.json' './tests/fixtures/file_2.json'
+	poetry run gendiff -f 'plain' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
-gendiff-test-yaml:
-	poetry run gendiff './tests/fixtures/file_1.yml' './tests/fixtures/file_2.yml'
+gendiff-test-plain:
+	poetry run gendiff -f 'plain' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
-gendiff-test-json-yaml:
-	poetry run gendiff './tests/fixtures/file_1.json' './tests/fixtures/file_2.yml'
+gendiff-test-stylish:
+	poetry run gendiff -f 'stylish' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
+
+gendiff-test-json:
+	poetry run gendiff -f 'json' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
+
+gendiff-test-default:
+	poetry run gendiff './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
 build:
 	poetry build

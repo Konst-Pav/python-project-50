@@ -31,23 +31,3 @@ dict2 = {
         }
     }
 }
-
-
-diff = [
-    {'key': 'common', 'children': [
-        {'key': 'setting1', 'value': 'Value 1', 'status': 'without changes'},
-        {'key': 'setting2', 'value': 200, 'status': 'without changes'},
-        {'key': 'setting3', 'value': True, 'status': 'without changes'},
-        {'key': 'setting6', 'children': [
-            {'key': 'doge', 'children': [
-                {'key': 'wow', 'value': '', 'status': 'without changes'}]},
-            {'key': 'key', 'value': 'value', 'status': 'without changes'}]}]},
-    {'key': 'group1', 'children': [
-        {'key': 'baz', 'value': 'bas', 'status': 'without changes'},
-        {'key': 'foo', 'value': 'bar', 'status': 'without changes'},
-        {'key': 'nest', 'children': [
-            {'key': 'key', 'value': 'value', 'status': 'without changes'}]}]},
-    {'key': 'group2', 'children': [
-        {'key': 'abc', 'value': 12345, 'status': 'without changes'},
-        {'key': 'deep', 'children': [
-            {'key': 'id', 'value': 45, 'status': 'without changes'}]}]}]
