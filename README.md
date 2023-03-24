@@ -2,6 +2,13 @@
 ___
 [![Actions Status](https://github.com/Konst-Pav/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/Konst-Pav/python-project-50/actions)  [![Test Coverage](https://api.codeclimate.com/v1/badges/480e2cbbc0dafb58087e/test_coverage)](https://codeclimate.com/github/Konst-Pav/python-project-50/test_coverage)  [![Maintainability](https://api.codeclimate.com/v1/badges/480e2cbbc0dafb58087e/maintainability)](https://codeclimate.com/github/Konst-Pav/python-project-50/maintainability)
 ___
+### Синтаксис команды:
+#### gendiff [-f] ['first_file'] ['second file']
+Варианты форматирования:
+- stylish (по умолчанию)
+- plain
+- json
+___
 ### Для утилиты нужно:
 - Python 3.10
 - Poetry 1.2
