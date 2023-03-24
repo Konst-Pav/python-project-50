@@ -20,7 +20,7 @@ def stylish_output(diff):
                     return [f"{replacer * (offset + 1)}- {arg_dict['key']}: {value1}".rstrip(),
                             f"{replacer * (offset + 1)}+ {arg_dict['key']}: {value2}".rstrip()]
                 elif status == 'without changes':
-                    return f"{replacer * (offset + 1)}  {arg_dict['key']}: {value}".rstrip()
+                    return f"{replacer * (offset + 1)}  {arg_dict['key']}: {value}"
 
         return '{\n' + '\n'.join(flatten(list(map(walk_dict, arg_list)))) + '\n' + f"{replacer * offset}" + '}'
 
