@@ -12,7 +12,10 @@ def parse_data(file1, file2):
         unique_keys = sorted_unique_keys(arg_dict1, arg_dict2)
 
         def compare_values(key):
-            def no_such_key(): pass
+
+            def no_such_key():
+                pass
+
             value1 = arg_dict1.get(key, no_such_key)
             value2 = arg_dict2.get(key, no_such_key)
             diff = {'key': key}
