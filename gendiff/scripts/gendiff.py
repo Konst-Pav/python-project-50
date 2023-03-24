@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-from gendiff_util.parser import parse_data
-from gendiff_util.formatter import format_diff
+from gendiff.parser import parse_data
+from gendiff.formatter import format_diff
 
 
 def generate_diff(path_to_file1, path_to_file2, formatter_name='stylish'):

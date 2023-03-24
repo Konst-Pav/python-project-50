@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from gendiff_util.scripts.gendiff import generate_diff
-from gendiff_util.parser import parse_data
+from gendiff.scripts.gendiff import generate_diff
+from gendiff.parser import parse_data
 from tests.fixtures.diff_nested_struct import diff_nested_struct_to_tests as diff_nested_struct
 from tests.fixtures.stylish_fixture_test import stylish_fixture
 from tests.fixtures.plain_fixture_test import plain_fixture
