@@ -13,12 +13,12 @@ def stylish_output(diff):
                 value2 = transform_dict(arg_dict.get('value2'), offset, replacer)
                 status = arg_dict.get('status')
                 if status == 'removed':
-                    return f"{replacer * (offset + 1)}- {arg_dict['key']}: {value1}".rstrip()
+                    return f"{replacer * (offset + 1)}- {arg_dict['key']}: {value1}"
                 elif status == 'added':
-                    return f"{replacer * (offset + 1)}+ {arg_dict['key']}: {value2}".rstrip()
+                    return f"{replacer * (offset + 1)}+ {arg_dict['key']}: {value2}"
                 elif status == 'updated':
-                    return [f"{replacer * (offset + 1)}- {arg_dict['key']}: {value1}".rstrip(),
-                            f"{replacer * (offset + 1)}+ {arg_dict['key']}: {value2}".rstrip()]
+                    return [f"{replacer * (offset + 1)}- {arg_dict['key']}: {value1}",
+                            f"{replacer * (offset + 1)}+ {arg_dict['key']}: {value2}"]
                 elif status == 'without changes':
                     return f"{replacer * (offset + 1)}  {arg_dict['key']}: {value}"
 
