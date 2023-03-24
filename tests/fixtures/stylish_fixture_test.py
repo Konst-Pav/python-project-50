@@ -41,4 +41,4 @@ stylish_fixture = """{
         }
         fee: 100500
     }
-}"""
+}"""  # noqa W291
