@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from gendiff.scripts.gendiff import generate_diff
-from gendiff.parser import parse_data
+from gendiff.parser import parse_files
 from tests.fixtures.diff_nested_struct import diff_nested_struct_to_tests as diff_nested_struct
 from tests.fixtures.stylish_fixture_test import stylish_fixture
 from tests.fixtures.plain_fixture_test import plain_fixture
@@ -23,12 +23,12 @@ plane_struct_diff = [{'key': 'follow', 'value1': False, 'status': 'removed'},
 
 
 def test_parse_data_plane_struct():
-    assert parse_data(json_file1, json_file2) == plane_struct_diff
-    assert parse_data(yaml_file1, yaml_file2) == plane_struct_diff
+    assert parse_files(json_file1, json_file2) == plane_struct_diff
+    assert parse_files(yaml_file1, yaml_file2) == plane_struct_diff
 
 
 def test_parse_data_nested_struct():
-    assert parse_data(nested_struct_file1, nested_struct_file2) == diff_nested_struct
+    assert parse_files(nested_struct_file1, nested_struct_file2) == diff_nested_struct
 
 
 def test_stylish_formatter():

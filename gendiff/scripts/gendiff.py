@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-from gendiff.parser import parse_data
+from gendiff.parser import parse_files
 from gendiff.formatter import format_diff
 
 
 def generate_diff(path_to_file1, path_to_file2, formatter_name='stylish'):
-    diff = parse_data(path_to_file1, path_to_file2)
+    diff = parse_files(path_to_file1, path_to_file2)
     return format_diff(diff, formatter_name)
 
 

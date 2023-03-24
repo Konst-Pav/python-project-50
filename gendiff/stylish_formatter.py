@@ -27,7 +27,6 @@ def stylish_output(diff):
     return walk_list(diff)
 
 
-# TODO: Если значение dict все значения привести к
 def transform_dict(value, offset, replacer='  '):
     if isinstance(value, dict):
         result = ['{']
