@@ -13,6 +13,9 @@ gendiff-test-stylish:
 gendiff-test-json:
 	poetry run gendiff -f 'json' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
+gendiff-test-yaml-stylish:
+	poetry run gendiff -f 'stylish' './tests/fixtures/nested_struct_1.yml' './tests/fixtures/nested_struct_2.yml'
+
 gendiff-test-default:
 	poetry run gendiff './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
