@@ -12,6 +12,12 @@ ___
 - Python 3.10
 - Poetry 1.2
 ___
+### Команды Makefile:
+**make build** — poetry build — команда для получения директории dist/ и пакетов для установки  
+**make install** — poetry install  
+**make package-install** — python3 -m pip install --user dist/*.whl — установка программы  
+**make lint** — poetry run flake8 brain_games — проверка линтера flake8
+___
 ### Вывод утилиты в формате "Stylish":
 [![asciicast](https://asciinema.org/a/Ow2aSGxCeVCC94dP3ZusNbZ3R.svg)](https://asciinema.org/a/Ow2aSGxCeVCC94dP3ZusNbZ3R)
 ___
@@ -20,9 +26,3 @@ ___
 ___
 ### Вывод утилиты в формате "Json":
 [![asciicast](https://asciinema.org/a/w70nsbRzm4FAfjTYCO9owAAWV.svg)](https://asciinema.org/a/w70nsbRzm4FAfjTYCO9owAAWV)
-___
-### Команды Makefile:
-**make build** — poetry build — команда для получения директории dist/ и пакетов для установки  
-**make install** — poetry install  
-**make package-install** — python3 -m pip install --user dist/*.whl — установка программы  
-**make lint** — poetry run flake8 brain_games — проверка линтера flake8
