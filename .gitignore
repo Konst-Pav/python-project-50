@@ -4,3 +4,6 @@ dist/
 .vscode/
 __pycache__
 tests/__pycache__
+.coverage
+coverage.xml
+.idea
