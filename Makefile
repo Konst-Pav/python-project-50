@@ -4,9 +4,6 @@ install:
 gendiff:
 	poetry run gendiff
 
-gendiff-test-json:
-	poetry run gendiff -f 'plain' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
-
 gendiff-test-plain:
 	poetry run gendiff -f 'plain' './tests/fixtures/nested_struct_1.json' './tests/fixtures/nested_struct_2.json'
 
