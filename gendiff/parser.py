@@ -1,7 +1,4 @@
-import json
-import yaml
-from yaml.loader import SafeLoader
-from os.path import basename
+from gendiff.file_to_dict_converter import convert_to_dict
 
 
 def parse_files(file1, file2):
@@ -41,25 +38,6 @@ def sorted_unique_keys(arg_dict, *args):
     list_unique_keys = list(unique_keys)
     list_unique_keys.sort()
     return list_unique_keys
-
-
-def convert_to_dict(path_to_file):
-    file_format = get_file_format(basename(path_to_file))
-    match file_format:
-        case 'json':
-            return json.load(open(path_to_file))
-        case 'yaml' | 'yml':
-            return yaml.load(open(path_to_file), Loader=SafeLoader)
-        case _:
-            # TODO: add exception
-            print('Unknown format')
-            return None
-
-
-def get_file_format(file_name):
-    for i, char in enumerate(file_name[::-1]):
-        if char == '.':
-            return file_name[-i::]
 
 
 def flatten(tree):
