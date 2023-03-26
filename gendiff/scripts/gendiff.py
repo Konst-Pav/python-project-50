@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from gendiff.gendiff_cli import parse_args
 from gendiff.parser import parse_files
-from gendiff.formatter import format_diff
+from gendiff.formatters.formatter import format_diff
 
 
 def generate_diff(path_to_file1, path_to_file2, formatter_name='stylish'):
