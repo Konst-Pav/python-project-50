@@ -12,4 +12,4 @@ def format_diff(diff, formatter_name):
         case 'json':
             return json_output(diff)
         case _:
-            return stylish_output(diff)
+            return 'Unknown format. The following formats are available: "stylish", "plain", "json".'
