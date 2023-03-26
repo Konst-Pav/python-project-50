@@ -1,4 +1,4 @@
-diff_nested_struct_to_tests = [
+parse_data_result = [
     {'key': 'games', 'children': [
         {'key': 'rpg', 'children': [
             {'key': '3dpv', 'value1': 'hades', 'value2': 'conan', 'status': 'updated'},
@@ -10,7 +10,7 @@ diff_nested_struct_to_tests = [
     {'key': 'num', 'value': 123, 'status': 'without changes'}
 ]
 
-dict1 = {
+parse_data_dict1 = {
     'num': 123,
     'games': {
         'strategy': 'wc3',
@@ -21,7 +21,7 @@ dict1 = {
     }
 }
 
-dict2 = {
+parse_data_dict2 = {
     'num': 123,
     'games': {
         'sim': 'il2',

@@ -1,39 +1,59 @@
 #!/usr/bin/env python3
+import pytest
+from gendiff.file_to_dict_converter import convert_to_dict
 from gendiff.scripts.gendiff import generate_diff
-from gendiff.parser import parse_files
-from tests.fixtures.diff_nested_struct import diff_nested_struct_to_tests as diff_nested_struct
+from gendiff.parser import parse_data
+from tests.fixtures.dict_from_file import convert_to_dict_result
 from tests.fixtures.stylish_fixture_test import stylish_fixture
 from tests.fixtures.plain_fixture_test import plain_fixture
+from tests.fixtures.diff_nested_struct import parse_data_result, parse_data_dict1, parse_data_dict2
+from gendiff.gendiff_cli import parse_args
 
-json_file1 = './tests/fixtures/file_1.json'
-json_file2 = './tests/fixtures/file_2.json'
-yaml_file1 = './tests/fixtures/file_1.yml'
-yaml_file2 = './tests/fixtures/file_2.yml'
-nested_struct_file1 = './tests/fixtures/file_3.json'
-nested_struct_file2 = './tests/fixtures/file_4.json'
+json_file1 = './tests/fixtures/nested_struct_1.json'
+json_file2 = './tests/fixtures/nested_struct_2.json'
+yaml_file1 = './tests/fixtures/nested_struct_1.yml'
+yaml_file2 = './tests/fixtures/nested_struct_2.yml'
+stylish_expected_result = stylish_fixture
+plain_expected_result = plain_fixture
 
-nested_struct_file3 = './tests/fixtures/nested_struct_1.json'
-nested_struct_file4 = './tests/fixtures/nested_struct_2.json'
-
-plane_struct_diff = [{'key': 'follow', 'value1': False, 'status': 'removed'},
-                     {'key': 'host', 'value': 'hexlet.io', 'status': 'without changes'},
-                     {'key': 'proxy', 'value1': '123.234.53.22', 'status': 'removed'},
-                     {'key': 'timeout', 'value1': 50, 'value2': 20, 'status': 'updated'},
-                     {'key': 'verbose', 'value2': True, 'status': 'added'}]
+json_file = './tests/fixtures/file.json'
+yaml_file = './tests/fixtures/file.yaml'
+yml_file = './tests/fixtures/file.yml'
 
 
-def test_parse_data_plane_struct():
-    assert parse_files(json_file1, json_file2) == plane_struct_diff
-    assert parse_files(yaml_file1, yaml_file2) == plane_struct_diff
+@pytest.mark.parametrize('file1, file2, formatter_name, expected_result', [
+    (json_file1, json_file2, 'stylish', stylish_fixture),
+    (yaml_file1, yaml_file2, 'stylish', stylish_fixture),
+    (json_file1, json_file2, 'plain', plain_fixture),
+    (yaml_file1, yaml_file2, 'plain', plain_fixture),
+])
+def test_formatter(file1, file2, formatter_name, expected_result):
+    result = generate_diff(file1, file2, formatter_name)
+    assert result == expected_result
 
 
-def test_parse_data_nested_struct():
-    assert parse_files(nested_struct_file1, nested_struct_file2) == diff_nested_struct
+@pytest.mark.parametrize('path_to_file, expected_result', [
+    (json_file, convert_to_dict_result),
+    (yaml_file, convert_to_dict_result),
+    (yml_file, convert_to_dict_result),
+])
+def test_convert_to_dict(path_to_file, expected_result):
+    result = convert_to_dict(path_to_file)
+    assert result == expected_result
 
 
-def test_stylish_formatter():
-    assert generate_diff(nested_struct_file3, nested_struct_file4, 'stylish') == stylish_fixture
+@pytest.mark.parametrize('dict1, dict2, expected_result', [
+    (parse_data_dict1, parse_data_dict2, parse_data_result)
+])
+def test_parse_data(dict1, dict2, expected_result):
+    result = parse_data(dict1, dict2)
+    assert result == expected_result
 
 
-def test_plain_formatter():
-    assert generate_diff(nested_struct_file3, nested_struct_file4, 'plain') == plain_fixture
+@pytest.mark.parametrize('option, format_name, path_to_file1, path_to_file2, expected_result', [
+    ('-f', 'stylish', '~/path/file1', '~/path/file2', ('stylish', '~/path/file1', '~/path/file2'))
+])
+def test_gendiff_cli(option, format_name, path_to_file1, path_to_file2, expected_result):
+    args = parse_args([option, format_name, path_to_file1, path_to_file2])
+    result = (args.format, args.first_file, args.second_file)
+    assert result == expected_result
