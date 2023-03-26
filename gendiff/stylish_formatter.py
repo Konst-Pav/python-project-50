@@ -39,14 +39,13 @@ def transform_dict(value, offset, replacer='  '):
                 result.append(f"{replacer * (offset + 4)}{key}: {inner_value}")
         result.append(f"{replacer * (offset + 2)}" + '}')
         return '\n'.join(result)
-    else:
-        match value:
-            case True | False:
-                return str(value).lower()
-            case value if value is None:
-                return 'null'
-            case _:
-                return value
+    match value:
+        case True | False:
+            return str(value).lower()
+        case value if value is None:
+            return 'null'
+        case _:
+            return value
 
 
 def flatten(tree):
