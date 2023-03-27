@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pytest
-from gendiff.file_to_dict_converter import convert_to_dict
+from gendiff.file_reader import convert_to_dict
 from gendiff.scripts.gendiff import generate_diff
 from gendiff.parser import parse_data
 from tests.fixtures.dict_from_file import convert_to_dict_result

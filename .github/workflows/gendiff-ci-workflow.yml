@@ -25,7 +25,3 @@ jobs:
         with:
           coverageCommand: make test-coverage
           debug: true
-      - name: Build and install
-        run: |
-          make build
-          make package-install

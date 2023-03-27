@@ -1,4 +1,4 @@
-from gendiff.file_to_dict_converter import convert_to_dict
+from gendiff.file_reader import convert_to_dict
 
 
 def parse_files(file1, file2):
