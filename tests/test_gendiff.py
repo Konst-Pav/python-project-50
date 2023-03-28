@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 import pytest
 from gendiff.file_reader import convert_to_dict
-from gendiff.scripts.gendiff import generate_diff
-from gendiff.parser import parse_data
+from gendiff.parser import parse_data, parse_files
 from tests.fixtures.dict_from_file import convert_to_dict_result
 from tests.fixtures.stylish_fixture_test import stylish_fixture
 from tests.fixtures.plain_fixture_test import plain_fixture
 from tests.fixtures.diff_nested_struct import parse_data_result, parse_data_dict1, parse_data_dict2
 from gendiff.gendiff_cli import parse_args
+from gendiff.formatters.formatter import format_diff
 
 json_file1 = './tests/fixtures/nested_struct_1.json'
 json_file2 = './tests/fixtures/nested_struct_2.json'
@@ -28,7 +28,8 @@ yml_file = './tests/fixtures/file.yml'
     (yaml_file1, yaml_file2, 'plain', plain_fixture),
 ])
 def test_formatter(file1, file2, formatter_name, expected_result):
-    result = generate_diff(file1, file2, formatter_name)
+    diff = parse_files(file1, file2)
+    result = format_diff(diff, formatter_name)
     assert result == expected_result
 
 
