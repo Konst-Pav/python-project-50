@@ -6,8 +6,7 @@ from gendiff.formatters.formatter import format_diff
 
 
 def generate_diff(path_to_file1, path_to_file2, formatter_name='stylish'):
-    diff = parse_files(path_to_file1, path_to_file2)
-    return format_diff(diff, formatter_name)
+    return format_diff(parse_files(path_to_file1, path_to_file2), formatter_name)
 
 
 def main():
