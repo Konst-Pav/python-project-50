@@ -1,4 +1,4 @@
-def plain_output(diff):
+def get_plain_output(diff):
 
     def walk_list(arg_list, path=[]):
 

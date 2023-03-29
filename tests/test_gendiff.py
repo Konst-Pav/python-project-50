@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pytest
-from gendiff.file_reader import convert_to_dict
+from gendiff.file_reader import get_dict_from_file
 from gendiff.parser import parse_data, parse_files
 from tests.fixtures.dict_from_file import convert_to_dict_result
 from tests.fixtures.stylish_fixture_test import stylish_fixture
@@ -39,7 +39,7 @@ def test_formatter(file1, file2, formatter_name, expected_result):
     (yml_file, convert_to_dict_result),
 ])
 def test_convert_to_dict(path_to_file, expected_result):
-    result = convert_to_dict(path_to_file)
+    result = get_dict_from_file(path_to_file)
     assert result == expected_result
 
 

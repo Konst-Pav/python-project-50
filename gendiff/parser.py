@@ -1,9 +1,9 @@
-from gendiff.file_reader import convert_to_dict
+from gendiff.file_reader import get_dict_from_file
 
 
 def parse_files(file1, file2):
-    dict_before = convert_to_dict(file1)
-    dict_after = convert_to_dict(file2)
+    dict_before = get_dict_from_file(file1)
+    dict_after = get_dict_from_file(file2)
     return parse_data(dict_before, dict_after)
 
 

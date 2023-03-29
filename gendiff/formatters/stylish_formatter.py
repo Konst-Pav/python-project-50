@@ -1,4 +1,4 @@
-def stylish_output(diff):
+def get_stylish_output(diff):
 
     def walk_list(arg_list, offset=0):
         replacer = '  '
